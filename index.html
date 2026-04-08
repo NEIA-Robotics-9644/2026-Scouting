@@ -1,0 +1,955 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Scout — Team 9644</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&family=Inter:wght@400;500;600&display=swap');
+
+  :root {
+    --red: #b81a77;
+    --red-dark: #b81a77;
+    --red-light: #b81a77;
+    --bg: #0f0f0f;
+    --bg2: #181818;
+    --bg3: #222222;
+    --border: #2e2e2e;
+    --text: #f0f0f0;
+    --text2: #999;
+    --text3: #555;
+    --green: #27ae60;
+    --yellow: #f39c12;
+    --radius: 10px;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    font-size: 15px;
+  }
+
+  /* ── HEADER ── */
+  header {
+    background: var(--bg2);
+    border-bottom: 1px solid var(--border);
+    padding: 0 16px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 56px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+  .logo {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 22px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    color: var(--text);
+  }
+  .logo span { color: var(--red-light); }
+  .saved-badge {
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 4px 12px;
+    font-size: 13px;
+    color: var(--text2);
+    cursor: pointer;
+    transition: border-color 0.2s;
+  }
+  .saved-badge:hover { border-color: var(--red); color: var(--text); }
+  .saved-badge .count {
+    font-weight: 600;
+    color: var(--red-light);
+  }
+
+  /* ── TABS ── */
+  .tabs {
+    display: flex;
+    overflow-x: auto;
+    background: var(--bg2);
+    border-bottom: 1px solid var(--border);
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+  .tabs::-webkit-scrollbar { display: none; }
+  .tab {
+    flex: 0 0 auto;
+    padding: 12px 18px;
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    color: var(--text3);
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+    transition: all 0.15s;
+    white-space: nowrap;
+    text-transform: uppercase;
+  }
+  .tab.active { color: var(--red-light); border-bottom-color: var(--red-light); }
+  .tab.has-required { position: relative; }
+  .tab.has-required::after {
+    content: '•';
+    color: var(--red-light);
+    font-size: 18px;
+    position: absolute;
+    top: 4px;
+    right: 4px;
+    line-height: 1;
+  }
+
+  /* ── MAIN CONTENT ── */
+  main { padding: 16px; max-width: 700px; margin: 0 auto; padding-bottom: 140px; }
+
+  .section-panel { display: none; }
+  .section-panel.active { display: block; }
+
+  /* ── FIELDS ── */
+  .field {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 14px 16px;
+    margin-bottom: 10px;
+    transition: border-color 0.15s;
+  }
+  .field:focus-within { border-color: #444; }
+  .field.invalid { border-color: var(--red) !important; }
+
+  .field-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 10px;
+  }
+  .field-title {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text2);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .required-dot {
+    width: 6px; height: 6px;
+    background: var(--red-light);
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+  .field-desc {
+    font-size: 12px;
+    color: var(--text3);
+    margin-bottom: 8px;
+    line-height: 1.4;
+  }
+
+  /* Text / Number inputs */
+  input[type="text"], input[type="number"] {
+    width: 100%;
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    color: var(--text);
+    font-family: 'Inter', sans-serif;
+    font-size: 16px;
+    padding: 10px 12px;
+    outline: none;
+    transition: border-color 0.15s;
+    -webkit-appearance: none;
+  }
+  input[type="text"]:focus, input[type="number"]:focus { border-color: var(--red); }
+
+  /* Boolean toggle */
+  .toggle-wrap {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .toggle-label { font-size: 15px; color: var(--text); }
+  .toggle {
+    position: relative;
+    width: 52px; height: 28px;
+    flex-shrink: 0;
+  }
+  .toggle input { opacity: 0; width: 0; height: 0; }
+  .toggle-track {
+    position: absolute;
+    inset: 0;
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    cursor: pointer;
+    transition: background 0.2s, border-color 0.2s;
+  }
+  .toggle-thumb {
+    position: absolute;
+    left: 3px; top: 3px;
+    width: 20px; height: 20px;
+    background: var(--text2);
+    border-radius: 50%;
+    transition: transform 0.2s, background 0.2s;
+  }
+  .toggle input:checked ~ .toggle-track { background: var(--red); border-color: var(--red-dark); }
+  .toggle input:checked ~ .toggle-track .toggle-thumb { transform: translateX(24px); background: white; }
+
+  /* Select */
+  select {
+    width: 100%;
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    color: var(--text);
+    font-family: 'Inter', sans-serif;
+    font-size: 15px;
+    padding: 10px 12px;
+    outline: none;
+    -webkit-appearance: none;
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%23666' d='M6 8L0 0h12z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 12px center;
+    padding-right: 36px;
+  }
+  select:focus { border-color: var(--red); }
+
+  /* Counter */
+  .counter {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .counter-btn {
+    width: 44px; height: 44px;
+    border-radius: 8px;
+    border: 1px solid var(--border);
+    background: var(--bg3);
+    color: var(--text);
+    font-size: 22px;
+    cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    transition: background 0.1s, border-color 0.1s;
+    flex-shrink: 0;
+    user-select: none;
+    -webkit-user-select: none;
+  }
+  .counter-btn:active { background: var(--border); }
+  .counter-btn.plus { border-color: var(--red-dark); color: var(--red-light); }
+  .counter-btn.plus:active { background: var(--red-dark); }
+  .counter-val {
+    flex: 1;
+    text-align: center;
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--text);
+  }
+
+  /* Range */
+  .range-wrap { display: flex; align-items: center; gap: 12px; }
+  input[type="range"] {
+    flex: 1;
+    -webkit-appearance: none;
+    appearance: none;
+    height: 4px;
+    background: var(--border);
+    border-radius: 2px;
+    outline: none;
+  }
+  input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 22px; height: 22px;
+    border-radius: 50%;
+    background: var(--red-light);
+    cursor: pointer;
+    border: 2px solid var(--red-dark);
+  }
+  .range-val {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 22px;
+    font-weight: 700;
+    min-width: 28px;
+    text-align: center;
+    color: var(--text);
+  }
+
+  /* ── BOTTOM BAR ── */
+  .bottom-bar {
+    position: fixed;
+    bottom: 0; left: 0; right: 0;
+    background: var(--bg2);
+    border-top: 1px solid var(--border);
+    padding: 12px 16px;
+    display: flex;
+    gap: 10px;
+    z-index: 100;
+  }
+  .btn {
+    flex: 1;
+    padding: 14px;
+    border-radius: var(--radius);
+    border: none;
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: opacity 0.15s, transform 0.1s;
+  }
+  .btn:active { transform: scale(0.97); opacity: 0.85; }
+  .btn-reset {
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    color: var(--text2);
+  }
+  .btn-commit {
+    background: var(--red);
+    color: white;
+    flex: 2;
+  }
+  .btn-commit:disabled { background: var(--bg3); color: var(--text3); cursor: not-allowed; }
+
+  /* ── MODAL OVERLAY ── */
+  .modal-overlay {
+    position: fixed; inset: 0;
+    background: rgba(0,0,0,0.85);
+    z-index: 200;
+    display: none;
+    align-items: flex-end;
+    justify-content: center;
+    padding: 20px;
+  }
+  .modal-overlay.open { display: flex; }
+  .modal {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    width: 100%;
+    max-width: 500px;
+    padding: 24px;
+    max-height: 80vh;
+    overflow-y: auto;
+  }
+  .modal h2 {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 20px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    margin-bottom: 6px;
+  }
+  .modal-sub { font-size: 13px; color: var(--text2); margin-bottom: 20px; }
+
+  /* Saved entries list */
+  .entry-list { display: flex; flex-direction: column; gap: 8px; margin-bottom: 20px; }
+  .entry-item {
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 10px 14px;
+    font-size: 13px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+  }
+  .entry-meta { color: var(--text2); font-size: 12px; margin-top: 2px; }
+  .entry-del {
+    background: none;
+    border: none;
+    color: var(--text3);
+    font-size: 18px;
+    cursor: pointer;
+    padding: 4px;
+    border-radius: 4px;
+    flex-shrink: 0;
+  }
+  .entry-del:hover { color: var(--red-light); }
+
+  .modal-actions { display: flex; flex-direction: column; gap: 10px; }
+  .btn-export {
+    background: var(--green);
+    color: white;
+    border: none;
+    border-radius: var(--radius);
+    padding: 14px;
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    cursor: pointer;
+    width: 100%;
+    transition: opacity 0.15s;
+  }
+  .btn-export:hover { opacity: 0.9; }
+  .btn-export:disabled { background: var(--bg3); color: var(--text3); cursor: not-allowed; }
+  .btn-close-modal {
+    background: none;
+    border: 1px solid var(--border);
+    color: var(--text2);
+    border-radius: var(--radius);
+    padding: 12px;
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    cursor: pointer;
+    width: 100%;
+  }
+  .url-input-wrap { margin-bottom: 14px; }
+  .url-input-wrap label { font-size: 12px; color: var(--text2); display: block; margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.5px; font-weight: 600; }
+  .url-input-wrap input {
+    font-size: 13px;
+    padding: 8px 10px;
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    color: var(--text);
+    width: 100%;
+    outline: none;
+    font-family: 'Inter', sans-serif;
+  }
+  .url-input-wrap input:focus { border-color: var(--green); }
+
+  /* Success commit flash */
+  .commit-flash {
+    position: fixed;
+    top: 70px; left: 50%; transform: translateX(-50%);
+    background: var(--green);
+    color: white;
+    padding: 10px 20px;
+    border-radius: 20px;
+    font-family: 'Rajdhani', sans-serif;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    font-size: 15px;
+    z-index: 300;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s;
+    white-space: nowrap;
+  }
+  .commit-flash.show { opacity: 1; }
+
+  /* Status message */
+  .status-msg {
+    font-size: 13px;
+    padding: 10px 14px;
+    border-radius: 8px;
+    margin-bottom: 12px;
+    display: none;
+  }
+  .status-msg.error { background: rgba(192,57,43,0.15); border: 1px solid var(--red); color: #e74c3c; display: block; }
+  .status-msg.success { background: rgba(39,174,96,0.15); border: 1px solid var(--green); color: #2ecc71; display: block; }
+  .status-msg.info { background: rgba(243,156,18,0.15); border: 1px solid var(--yellow); color: var(--yellow); display: block; }
+
+  .empty-state {
+    text-align: center;
+    padding: 30px 20px;
+    color: var(--text3);
+    font-size: 14px;
+  }
+  .empty-state .icon { font-size: 32px; margin-bottom: 8px; }
+
+  /* Divider */
+  .modal-divider {
+    border: none;
+    border-top: 1px solid var(--border);
+    margin: 16px 0;
+  }
+
+  .clear-all-btn {
+    background: none;
+    border: none;
+    color: var(--red);
+    font-size: 13px;
+    cursor: pointer;
+    padding: 4px 0;
+    text-decoration: underline;
+    font-family: 'Inter', sans-serif;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo">SCOUT <span>9644</span></div>
+  <div class="saved-badge" onclick="openModal()">
+    Saved: <span class="count" id="badge-count">0</span>
+  </div>
+</header>
+
+<div class="tabs" id="tabs"></div>
+
+<main id="main"></main>
+
+<div class="bottom-bar">
+  <button class="btn btn-reset" onclick="resetForm()">Reset</button>
+  <button class="btn btn-commit" id="commit-btn" onclick="commitEntry()">Commit</button>
+</div>
+
+<!-- Saved Entries Modal -->
+<div class="modal-overlay" id="modal-overlay">
+  <div class="modal">
+    <h2>Saved Entries</h2>
+    <p class="modal-sub">All match data saved on this tablet</p>
+
+    <div id="status-msg" class="status-msg"></div>
+    <div id="entry-list" class="entry-list"></div>
+
+    <hr class="modal-divider">
+
+    <div class="url-input-wrap">
+      <label>Google Apps Script URL (needed for export)</label>
+      <input type="text" id="apps-script-url" placeholder="https://script.google.com/macros/s/.../exec"
+             oninput="saveScriptUrl(this.value)">
+    </div>
+
+    <div class="modal-actions">
+      <button class="btn-export" id="export-btn" onclick="exportToSheets()"> Export to Google Sheets</button>
+      <button class="btn-close-modal" onclick="closeModal()">Close</button>
+    </div>
+  </div>
+</div>
+
+<!-- Commit success flash -->
+<div class="commit-flash" id="commit-flash">✓ Entry saved!</div>
+
+<script>
+// ══════════════════════════════════════════════
+// CONFIG — Team 9644's field definitions
+// ══════════════════════════════════════════════
+const CONFIG = {
+  delimiter: "\t",
+  sections: [
+    {
+      name: "Prematch",
+      fields: [
+        { title: "Scouter Initials", description: "Enter the initials of the scouter.", type: "text", required: true, code: "scouter", formResetBehavior: "preserve", defaultValue: "" },
+        { title: "Match Number", description: "Enter the match number.", type: "number", required: true, code: "matchNumber", formResetBehavior: "increment", defaultValue: 1 },
+        { title: "Robot", description: "The robot you are scouting this match, based on driver station position.", type: "select", required: true, code: "robot", formResetBehavior: "preserve", defaultValue: "R1", choices: { R1: "Red 1", R2: "Red 2", R3: "Red 3", B1: "Blue 1", B2: "Blue 2", B3: "Blue 3" } },
+        { title: "Team Number", description: "The team number of the robot you're scouting.", type: "number", required: true, code: "teamNumber", formResetBehavior: "reset", defaultValue: 0, min: 0, max: 19999 },
+        { title: "Starting Position", description: "The starting position of the robot.", type: "select", required: true, code: "Prsp", formResetBehavior: "reset", defaultValue: "", choices: { R1: "Outpost Side", R2: "Middle", R3: "Depot Side" } },
+        { title: "No Show", description: "Check if the robot did not show up for the match.", type: "boolean", required: false, code: "noShow", formResetBehavior: "reset", defaultValue: false }
+      ]
+    },
+    {
+      name: "Autonomous",
+      fields: [
+        { title: "Moved?", description: "Check if the robot moved during autonomous.", type: "boolean", required: false, code: "Mved", formResetBehavior: "reset", defaultValue: false },
+        { title: "Fuel Scored", description: "The amount of fuel scored in auto.", type: "counter", required: false, code: "FS", formResetBehavior: "reset", defaultValue: 0, min: 0, step: 1 },
+        { title: "Outpost Intake", description: "Check if the robot collected fuel from the outpost.", type: "boolean", required: false, code: "AOutpostIntake", formResetBehavior: "reset", defaultValue: false },
+        { title: "Depot Intake", description: "Check if the robot collected fuel from the depot.", type: "boolean", required: false, code: "ADepotIntake", formResetBehavior: "reset", defaultValue: false },
+        { title: "Neutral Zone Intake", description: "Check if the robot collected fuel from the neutral zone.", type: "boolean", required: false, code: "ANeutralIntake", formResetBehavior: "reset", defaultValue: false },
+        { title: "Climbed Tower", description: "The height the robot climbed in auto.", type: "select", required: false, code: "climbedAuto", formResetBehavior: "reset", defaultValue: "No", choices: { No: "Didn't Climb", L1: "Level 1", F: "Failed Climb" } },
+        { title: "Auto Foul", type: "counter", required: false, code: "auf", formResetBehavior: "reset", defaultValue: 0, min: 0, step: 1 }
+      ]
+    },
+    {
+      name: "Teleop",
+      fields: [
+        { title: "Fuel Collected From Floor", description: "Collected fuel from the ground.", type: "boolean", required: false, code: "FFG", formResetBehavior: "reset", defaultValue: false },
+        { title: "Fuel Collected From Player", description: "Collected fuel from the human player.", type: "boolean", required: false, code: "FFHP", formResetBehavior: "reset", defaultValue: false },
+        { title: "1-Pt Fuel Scored", description: "The amount of 1-pt fuel scored in teleop.", type: "counter", required: false, code: "FIT", formResetBehavior: "reset", defaultValue: 0, min: 0, step: 1 },
+        { title: "5-Pt Fuel Scored", description: "The amount of 5-pt fuel scored in teleop.", type: "counter", required: false, code: "FIT2", formResetBehavior: "reset", defaultValue: 0, min: 0, step: 1 },
+        { title: "10-Pt Fuel Scored", description: "The amount of 10-pt fuel scored in teleop.", type: "counter", required: false, code: "FIT3", formResetBehavior: "reset", defaultValue: 0, min: 0, step: 1 },
+        { title: "Touched Opposing Tower", description: "The number of times the opposing tower was touched.", type: "counter", required: false, code: "FouTech", formResetBehavior: "reset", defaultValue: 0, min: 0, step: 1 },
+        { title: "During Off-Shift", type: "select", required: true, code: "OffShift", formResetBehavior: "reset", defaultValue: "Nothing", choices: { Defended: "Defended", Passed: "Passed", Nothing: "Did Nothing" } },
+        { title: "Got Stuck on Fuel?", type: "boolean", required: false, code: "GotStuck", formResetBehavior: "reset", defaultValue: false }
+      ]
+    },
+    {
+      name: "Endgame",
+      fields: [
+        { title: "Climbed Tower", type: "select", required: true, code: "climbed", formResetBehavior: "reset", defaultValue: "No", choices: { No: "Didn't Climb", L1: "Level 1", L2: "Level 2", L3: "Level 3", F: "Failed Climb" } },
+        { title: "Died?", type: "boolean", required: false, code: "DEg", formResetBehavior: "reset", defaultValue: false }
+      ]
+    },
+    {
+      name: "Postmatch",
+      fields: [
+        { title: "Passing Skill", type: "range", required: false, code: "or", formResetBehavior: "reset", defaultValue: 2, min: 0, max: 5, step: 1 },
+        { title: "Defensive Skill", type: "range", required: false, code: "dr", formResetBehavior: "reset", defaultValue: 2, min: 0, max: 5, step: 1 },
+        { title: "Was Robot Defended?", type: "boolean", required: false, code: "WasDefended", formResetBehavior: "reset", defaultValue: false },
+        { title: "Yellow/Red Card", type: "select", required: true, code: "yc", formResetBehavior: "reset", defaultValue: "No Card", choices: { "No Card": "No Card", Yellow: "Yellow Card", Red: "Red Card" } },
+        { title: "Comments", type: "text", required: false, code: "co", formResetBehavior: "reset", defaultValue: "" }
+      ]
+    }
+  ]
+};
+
+// ══════════════════════════════════════════════
+// STATE
+// ══════════════════════════════════════════════
+let formValues = {};
+let activeSection = 0;
+
+function getAllFields() {
+  return CONFIG.sections.flatMap(s => s.fields);
+}
+
+function initFormValues() {
+  getAllFields().forEach(f => {
+    if (!(f.code in formValues)) {
+      formValues[f.code] = f.defaultValue;
+    }
+  });
+}
+
+// ══════════════════════════════════════════════
+// RENDER
+// ══════════════════════════════════════════════
+function render() {
+  renderTabs();
+  renderSections();
+  updateBadge();
+}
+
+function renderTabs() {
+  const tabsEl = document.getElementById('tabs');
+  tabsEl.innerHTML = CONFIG.sections.map((s, i) => {
+    const hasReq = s.fields.some(f => f.required);
+    return `<div class="tab ${i === activeSection ? 'active' : ''} ${hasReq ? 'has-required' : ''}"
+      onclick="switchTab(${i})">${s.name}</div>`;
+  }).join('');
+}
+
+function renderSections() {
+  const mainEl = document.getElementById('main');
+  mainEl.innerHTML = CONFIG.sections.map((s, si) => `
+    <div class="section-panel ${si === activeSection ? 'active' : ''}" id="section-${si}">
+      ${s.fields.map(f => renderField(f)).join('')}
+    </div>
+  `).join('');
+
+  // Attach event listeners after rendering
+  getAllFields().forEach(f => attachFieldListeners(f));
+}
+
+function renderField(f) {
+  const val = formValues[f.code];
+  let input = '';
+
+  if (f.type === 'text') {
+    input = `<input type="text" id="f_${f.code}" value="${escHtml(String(val))}"
+      placeholder="${f.title}" autocomplete="off" autocorrect="off" spellcheck="false">`;
+  } else if (f.type === 'number') {
+    const min = f.min !== undefined ? `min="${f.min}"` : '';
+    const max = f.max !== undefined ? `max="${f.max}"` : '';
+    input = `<input type="number" id="f_${f.code}" value="${val}" ${min} ${max}
+      inputmode="numeric" pattern="[0-9]*">`;
+  } else if (f.type === 'boolean') {
+    input = `<div class="toggle-wrap">
+      <span class="toggle-label">${f.required ? '' : (val ? 'Yes' : 'No')}</span>
+      <label class="toggle">
+        <input type="checkbox" id="f_${f.code}" ${val ? 'checked' : ''}>
+        <div class="toggle-track"><div class="toggle-thumb"></div></div>
+      </label>
+    </div>`;
+  } else if (f.type === 'select') {
+    const opts = Object.entries(f.choices || {}).map(([k, v]) =>
+      `<option value="${escHtml(k)}" ${k === val ? 'selected' : ''}>${escHtml(v)}</option>`
+    ).join('');
+    input = `<select id="f_${f.code}">${opts}</select>`;
+  } else if (f.type === 'counter') {
+    input = `<div class="counter">
+      <button class="counter-btn minus" onclick="changeCounter('${f.code}', -1)">−</button>
+      <div class="counter-val" id="f_${f.code}">${val}</div>
+      <button class="counter-btn plus" onclick="changeCounter('${f.code}', 1)">+</button>
+    </div>`;
+  } else if (f.type === 'range') {
+    input = `<div class="range-wrap">
+      <input type="range" id="f_${f.code}" min="${f.min||0}" max="${f.max||5}" step="${f.step||1}" value="${val}">
+      <div class="range-val" id="rv_${f.code}">${val}</div>
+    </div>`;
+  }
+
+  const desc = f.description ? `<div class="field-desc">${escHtml(f.description)}</div>` : '';
+  const reqDot = f.required ? `<span class="required-dot"></span>` : '';
+
+  return `<div class="field" id="field_${f.code}">
+    <div class="field-header">
+      <div class="field-title">${reqDot}${escHtml(f.title)}</div>
+    </div>
+    ${desc}${input}
+  </div>`;
+}
+
+function attachFieldListeners(f) {
+  const el = document.getElementById(`f_${f.code}`);
+  if (!el) return;
+
+  if (f.type === 'text' || f.type === 'number') {
+    el.addEventListener('input', () => {
+      formValues[f.code] = f.type === 'number' ? (parseFloat(el.value) || 0) : el.value;
+      clearInvalid(f.code);
+    });
+  } else if (f.type === 'boolean') {
+    el.addEventListener('change', () => {
+      formValues[f.code] = el.checked;
+      // Update label
+      const wrap = el.closest('.toggle-wrap');
+      if (wrap) {
+        const lbl = wrap.querySelector('.toggle-label');
+        if (lbl) lbl.textContent = el.checked ? 'Yes' : 'No';
+      }
+    });
+  } else if (f.type === 'select') {
+    el.addEventListener('change', () => {
+      formValues[f.code] = el.value;
+      clearInvalid(f.code);
+    });
+  } else if (f.type === 'range') {
+    el.addEventListener('input', () => {
+      formValues[f.code] = parseFloat(el.value);
+      const rv = document.getElementById(`rv_${f.code}`);
+      if (rv) rv.textContent = el.value;
+    });
+  }
+}
+
+function changeCounter(code, delta) {
+  const f = getAllFields().find(x => x.code === code);
+  if (!f) return;
+  let val = (formValues[code] || 0) + delta;
+  if (f.min !== undefined) val = Math.max(f.min, val);
+  formValues[code] = val;
+  const el = document.getElementById(`f_${code}`);
+  if (el) el.textContent = val;
+}
+
+function switchTab(i) {
+  activeSection = i;
+  document.querySelectorAll('.tab').forEach((t, idx) => t.classList.toggle('active', idx === i));
+  document.querySelectorAll('.section-panel').forEach((p, idx) => p.classList.toggle('active', idx === i));
+}
+
+function clearInvalid(code) {
+  const el = document.getElementById(`field_${code}`);
+  if (el) el.classList.remove('invalid');
+}
+
+function escHtml(str) {
+  return String(str).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+// ══════════════════════════════════════════════
+// COMMIT
+// ══════════════════════════════════════════════
+function commitEntry() {
+  // Validate required fields
+  const missing = getAllFields().filter(f => {
+    if (!f.required) return false;
+    const v = formValues[f.code];
+    if (f.type === 'text') return !v || String(v).trim() === '';
+    if (f.type === 'number') return v === null || v === undefined || v === '' || (f.code === 'teamNumber' && v === 0);
+    if (f.type === 'select') return !v || v === '';
+    return false;
+  });
+
+  if (missing.length > 0) {
+    // Highlight invalid fields and jump to first one
+    missing.forEach(f => {
+      const el = document.getElementById(`field_${f.code}`);
+      if (el) el.classList.add('invalid');
+    });
+    // Find which section the first missing field is in
+    const firstCode = missing[0].code;
+    CONFIG.sections.forEach((s, i) => {
+      if (s.fields.some(f => f.code === firstCode)) switchTab(i);
+    });
+    // Scroll to it
+    setTimeout(() => {
+      const el = document.getElementById(`field_${firstCode}`);
+      if (el) el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }, 100);
+    return;
+  }
+
+  // Build tab-separated string in field order
+  const row = getAllFields().map(f => {
+    const v = formValues[f.code];
+    if (f.type === 'boolean') return v ? 'true' : 'false';
+    return String(v);
+  }).join(CONFIG.delimiter);
+
+  // Save to localStorage
+  const entries = getSavedEntries();
+  entries.push({
+    data: row,
+    savedAt: new Date().toISOString(),
+    match: formValues['matchNumber'] || '?',
+    team: formValues['teamNumber'] || '?',
+    robot: formValues['robot'] || '?'
+  });
+  localStorage.setItem('scout9644_entries', JSON.stringify(entries));
+
+  updateBadge();
+  showFlash();
+  resetForm();
+}
+
+function showFlash() {
+  const el = document.getElementById('commit-flash');
+  el.classList.add('show');
+  setTimeout(() => el.classList.remove('show'), 2000);
+}
+
+// ══════════════════════════════════════════════
+// RESET
+// ══════════════════════════════════════════════
+function resetForm() {
+  getAllFields().forEach(f => {
+    if (f.formResetBehavior === 'preserve') return;
+    if (f.formResetBehavior === 'increment' && typeof formValues[f.code] === 'number') {
+      formValues[f.code] = formValues[f.code] + 1;
+      return;
+    }
+    formValues[f.code] = f.defaultValue;
+  });
+  renderSections();
+  switchTab(0);
+  window.scrollTo(0, 0);
+}
+
+// ══════════════════════════════════════════════
+// SAVED ENTRIES
+// ══════════════════════════════════════════════
+function getSavedEntries() {
+  try { return JSON.parse(localStorage.getItem('scout9644_entries') || '[]'); }
+  catch(e) { return []; }
+}
+
+function updateBadge() {
+  document.getElementById('badge-count').textContent = getSavedEntries().length;
+}
+
+function deleteEntry(idx) {
+  const entries = getSavedEntries();
+  entries.splice(idx, 1);
+  localStorage.setItem('scout9644_entries', JSON.stringify(entries));
+  updateBadge();
+  openModal(); // re-render modal
+}
+
+function clearAllEntries() {
+  if (!confirm('Delete ALL saved entries from this tablet? This cannot be undone.')) return;
+  localStorage.removeItem('scout9644_entries');
+  updateBadge();
+  openModal();
+}
+
+// ══════════════════════════════════════════════
+// MODAL
+// ══════════════════════════════════════════════
+function openModal() {
+  const entries = getSavedEntries();
+  const listEl = document.getElementById('entry-list');
+  const msgEl = document.getElementById('status-msg');
+  msgEl.className = 'status-msg';
+  msgEl.textContent = '';
+
+  if (entries.length === 0) {
+    listEl.innerHTML = `<div class="empty-state"><div class="icon"></div>No entries saved yet.<br>Fill out the form and click Commit.</div>`;
+  } else {
+    listEl.innerHTML = entries.map((e, i) => `
+      <div class="entry-item">
+        <div>
+          <div style="font-weight:600">Match ${e.match} — Team ${e.team} (${e.robot})</div>
+          <div class="entry-meta">${new Date(e.savedAt).toLocaleString()}</div>
+        </div>
+        <button class="entry-del" onclick="deleteEntry(${i})" title="Delete">✕</button>
+      </div>
+    `).join('') + `<button class="clear-all-btn" onclick="clearAllEntries()">Clear all entries</button>`;
+  }
+
+  // Restore saved URL
+  const savedUrl = localStorage.getItem('scout9644_script_url') || '';
+  document.getElementById('apps-script-url').value = savedUrl;
+
+  const exportBtn = document.getElementById('export-btn');
+  exportBtn.disabled = entries.length === 0;
+  exportBtn.textContent = entries.length > 0
+    ? ` Export ${entries.length} entr${entries.length === 1 ? 'y' : 'ies'} to Google Sheets`
+    : 'Export to Google Sheets';
+
+  document.getElementById('modal-overlay').classList.add('open');
+}
+
+function closeModal() {
+  document.getElementById('modal-overlay').classList.remove('open');
+}
+
+function saveScriptUrl(val) {
+  localStorage.setItem('scout9644_script_url', val.trim());
+}
+
+// ══════════════════════════════════════════════
+// EXPORT
+// ══════════════════════════════════════════════
+function exportToSheets() {
+  const url = (localStorage.getItem('scout9644_script_url') || '').trim();
+  if (!url || !url.startsWith('https://')) {
+    showStatus('error', 'Please paste your Google Apps Script URL above first.');
+    return;
+  }
+
+  const entries = getSavedEntries();
+  if (entries.length === 0) {
+    showStatus('error', 'No entries to export.');
+    return;
+  }
+
+  const exportBtn = document.getElementById('export-btn');
+  exportBtn.disabled = true;
+  exportBtn.textContent = ' Sending...';
+  showStatus('info', 'Sending data... please wait.');
+
+  fetch(url, {
+    method: 'POST',
+    mode: 'no-cors',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ entries: entries.map(e => e.data) })
+  })
+  .then(() => {
+    showStatus('success', `✓ ${entries.length} entr${entries.length === 1 ? 'y' : 'ies'} sent! Check your sheet, then clear if it looks correct.`);
+    exportBtn.textContent = 'Export Again';
+    exportBtn.disabled = false;
+  })
+  .catch(err => {
+    showStatus('error', 'Export failed: ' + err + '\n\nCheck your WiFi connection and try again. Your data is still saved.');
+    exportBtn.textContent = ` Export ${entries.length} entries to Google Sheets`;
+    exportBtn.disabled = false;
+  });
+}
+
+function showStatus(type, msg) {
+  const el = document.getElementById('status-msg');
+  el.className = 'status-msg ' + type;
+  el.textContent = msg;
+}
+
+// Close modal on overlay click
+document.getElementById('modal-overlay').addEventListener('click', function(e) {
+  if (e.target === this) closeModal();
+});
+
+// ══════════════════════════════════════════════
+// INIT
+// ══════════════════════════════════════════════
+initFormValues();
+render();
+</script>
+</body>
+</html>
