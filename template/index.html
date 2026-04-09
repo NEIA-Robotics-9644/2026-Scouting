@@ -536,11 +536,11 @@ const CONFIG = {
     {
       name: "Prematch",
       fields: [
-        { title: "Scouter Initials", description: "Enter the initials of the scouter.", type: "text", required: true, code: "scouter", formResetBehavior: "preserve", defaultValue: "" },
+        { title: "Scouter Initials", description: "Enter the initials of the scouter.", type: "text", required: true, code: "scouter", formResetBehavior: "preserve", defaultValue: " " },
         { title: "Match Number", description: "Enter the match number.", type: "number", required: true, code: "matchNumber", formResetBehavior: "increment", defaultValue: 1 },
         { title: "Robot", description: "The robot you are scouting this match, based on driver station position.", type: "select", required: true, code: "robot", formResetBehavior: "preserve", defaultValue: "R1", choices: { R1: "Red 1", R2: "Red 2", R3: "Red 3", B1: "Blue 1", B2: "Blue 2", B3: "Blue 3" } },
         { title: "Team Number", description: "The team number of the robot you're scouting.", type: "number", required: true, code: "teamNumber", formResetBehavior: "reset", defaultValue: 0, min: 0, max: 19999 },
-        { title: "Starting Position", description: "The starting position of the robot.", type: "select", required: true, code: "Prsp", formResetBehavior: "reset", defaultValue: "", choices: { R1: "Outpost Side", R2: "Middle", R3: "Depot Side" } },
+        { title: "Starting Position", description: "The starting position of the robot.", type: "select", required: true, code: "Prsp", formResetBehavior: "reset", defaultValue: "Outpost Side", choices: { outpost: "Outpost Side", middle: "Middle", depot: "Depot Side" } },
         { title: "No Show", description: "Check if the robot did not show up for the match.", type: "boolean", required: false, code: "noShow", formResetBehavior: "reset", defaultValue: false }
       ]
     },
@@ -561,9 +561,9 @@ const CONFIG = {
       fields: [
         { title: "Fuel Collected From Floor", description: "Collected fuel from the ground.", type: "boolean", required: false, code: "FFG", formResetBehavior: "reset", defaultValue: false },
         { title: "Fuel Collected From Player", description: "Collected fuel from the human player.", type: "boolean", required: false, code: "FFHP", formResetBehavior: "reset", defaultValue: false },
-        { title: "1-Pt Fuel Scored", description: "The amount of 1-pt fuel scored in teleop.", type: "counter", required: false, code: "FIT", formResetBehavior: "reset", defaultValue: 0, min: 0, step: 1 },
-        { title: "5-Pt Fuel Scored", description: "The amount of 5-pt fuel scored in teleop.", type: "counter", required: false, code: "FIT2", formResetBehavior: "reset", defaultValue: 0, min: 0, step: 1 },
-        { title: "10-Pt Fuel Scored", description: "The amount of 10-pt fuel scored in teleop.", type: "counter", required: false, code: "FIT3", formResetBehavior: "reset", defaultValue: 0, min: 0, step: 1 },
+        { title: "5-Pt Fuel Scored", description: "The amount of 5-pt fuel scored in teleop.", type: "counter", required: false, code: "FIT", formResetBehavior: "reset", defaultValue: 0, min: 0, step: 1 },
+        { title: "15-Pt Fuel Scored", description: "The amount of 15-pt fuel scored in teleop.", type: "counter", required: false, code: "FIT2", formResetBehavior: "reset", defaultValue: 0, min: 0, step: 1 },
+        { title: "30-Pt Fuel Scored", description: "The amount of 30-pt fuel scored in teleop.", type: "counter", required: false, code: "FIT3", formResetBehavior: "reset", defaultValue: 0, min: 0, step: 1 },
         { title: "Touched Opposing Tower", description: "The number of times the opposing tower was touched.", type: "counter", required: false, code: "FouTech", formResetBehavior: "reset", defaultValue: 0, min: 0, step: 1 },
         { title: "During Off-Shift", type: "select", required: true, code: "OffShift", formResetBehavior: "reset", defaultValue: "Nothing", choices: { Defended: "Defended", Passed: "Passed", Nothing: "Did Nothing" } },
         { title: "Got Stuck on Fuel?", type: "boolean", required: false, code: "GotStuck", formResetBehavior: "reset", defaultValue: false }
