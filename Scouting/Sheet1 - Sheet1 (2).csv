@@ -1,0 +1,72 @@
+Scouting,Initials,Robot,Team #,Starting Position,No Show,Moved? (Drove off starting line during auto),Fuel Scored,Outpost Intake,Depot Intake,Neutral Zone Intake,Climbed Tower,Auto Foul,Fuel Collected from Floor,Fuel Collected from Player,5 Robot Fuel Scored,15 Robot Fuel Scored,30 Robot Fuel Scored,Touched Opposing Tower,During Off-Shift,Got Stuck on Fuel?,Climbed Tower,Died?,Passing Skill,Defensive Skill,Was Robot Defended by Other Alliance?,Yellow / Red Card,Comments
+CD,1,R2,1678,Outpost Side,No,Yes,25,Yes,Yes,Yes,Level 1,No,45,15,1,1,0,Yes,No,No,Yes,No,5,3,Yes,None,Great shooter
+EF,1,R3,1114,Depot Side,No,No,5,No,Yes,No,No,Yes,10,5,0,0,0,No,Yes,No,No,Yes,2,4,No,None,Auto foul
+GH,2,R1,2056,Middle,No,Yes,30,Yes,Yes,Yes,Level 2,No,60,20,1,1,1,Yes,No,No,Yes,No,5,3,Yes,None,Top tier
+IJ,2,R2,148,Middle,No,Yes,18,Yes,No,Yes,No,No,35,10,1,0,0,No,No,No,Yes,No,4,3,Yes,None,Consistent
+KL,2,R3,1323,Outpost Side,No,Yes,22,Yes,Yes,No,Level 3,No,40,12,1,1,0,Yes,No,No,Yes,No,5,2,Yes,None,Fast cycles
+MN,3,R1,900,Depot Side,No,No,0,No,No,No,No,No,0,0,0,0,0,No,No,Yes,No,Yes,1,5,No,None,Broke down
+OP,3,R2,3476,Middle,No,Yes,16,Yes,Yes,Yes,No,No,28,8,1,0,0,No,No,No,Yes,No,4,3,Yes,None,Good intake
+QR,3,R3,6045,Outpost Side,No,Yes,10,Yes,No,Yes,No,No,20,6,1,0,0,No,No,No,No,No,3,2,No,None,Average
+ST,4,R1,7157,Depot Side,No,Yes,14,Yes,Yes,No,No,No,25,7,1,0,0,No,No,No,Yes,No,3,3,Yes,None,Stable
+UV,4,R2,1923,Middle,No,Yes,20,Yes,Yes,Yes,Level 1,No,38,14,1,1,0,Yes,No,No,Yes,No,5,2,Yes,None,Clutch climb
+WX,4,R3,4613,Outpost Side,No,No,8,No,Yes,No,No,No,15,5,0,0,0,No,Yes,No,No,No,2,4,No,None,Slow
+YZ,5,R1,498,Depot Side,No,Yes,19,Yes,No,Yes,No,No,30,9,1,0,0,No,No,No,Yes,No,4,3,Yes,None,Good auto
+AA,5,R2,987,Middle,No,Yes,28,Yes,Yes,Yes,Level 2,No,50,20,1,1,1,Yes,No,No,Yes,No,5,3,Yes,None,Excellent
+BB,5,R3,2102,Outpost Side,No,Yes,15,Yes,Yes,No,No,No,27,10,1,0,0,No,No,No,No,No,3,2,Yes,None,Decent
+CC,6,R1,3006,Depot Side,No,Yes,11,Yes,No,Yes,No,No,22,6,1,0,0,No,No,No,Yes,No,3,3,No,None,Okay
+DD,6,R2,3648,Middle,No,Yes,26,Yes,Yes,Yes,Level 3,No,48,18,1,1,0,Yes,No,No,Yes,No,5,3,Yes,None,Strong
+EE,6,R3,5071,Outpost Side,No,No,7,No,Yes,No,No,No,14,4,0,0,0,No,Yes,No,No,No,2,3,No,None,Slow cycles
+FF,7,R1,8174,Depot Side,No,Yes,21,Yes,Yes,Yes,No,No,36,12,1,1,0,No,No,No,Yes,No,4,2,Yes,None,Smooth
+GG,7,R2,435,Middle,No,Yes,17,Yes,No,Yes,No,No,29,8,1,0,0,No,No,No,Yes,No,3,3,Yes,None,Consisten
+HH,7,R3,1533,Outpost Side,No,Yes,24,Yes,Yes,Yes,Level 1,No,44,16,1,1,0,Yes,No,No,Yes,No,5,2,Yes,None,Quick
+II,8,R1,2059,Depot Side,No,No,3,No,No,No,No,Yes,5,2,0,0,0,No,Yes,Yes,No,Yes,1,4,No,None,Got stuck
+JJ,8,R2,3196,Middle,No,Yes,13,Yes,Yes,No,No,No,23,7,1,0,0,No,No,No,Yes,No,3,3,Yes,None,Average
+KK,8,R3,11,Outpost Side,No,Yes,27,Yes,Yes,Yes,Level 2,No,49,18,1,1,1,Yes,No,No,Yes,No,5,3,Yes,None,Elite
+LL,9,R1,16,Depot Side,No,Yes,18,Yes,No,Yes,No,No,31,9,1,0,0,No,No,No,Yes,No,4,4,Yes,None,Defense strong
+MM,9,R2,8,Middle,No,Yes,23,Yes,Yes,Yes,Level 3,No,42,15,1,1,0,Yes,No,No,Yes,No,5,2,Yes,None,Great
+NN,9,R3,294,Outpost Side,No,Yes,9,Yes,No,No,No,No,18,5,0,0,0,No,No,No,No,No,3,2,No,None,Low output
+OO,10,R1,1923,Depot Side,No,Yes,20,Yes,Yes,Yes,Level 1,No,37,14,1,1,0,Yes,No,No,Yes,No,5,3,Yes,None,Clutch
+PP,10,R2,3476,Middle,No,Yes,14,Yes,Yes,No,No,No,25,8,1,0,0,No,No,No,Yes,No,3,3,Yes,None,Stable
+QQ,10,R3,6045,Outpost Side,No,No,6,No,Yes,No,No,No,12,3,0,0,0,No,Yes,No,No,No,2,3,No,None,Slow
+RR,11,R1,7157,Depot Side,No,Yes,16,Yes,Yes,Yes,No,No,28,9,1,0,0,No,No,No,Yes,No,4,3,Yes,None,Good
+SS,11,R2,254,Middle,No,Yes,32,Yes,Yes,Yes,Level 2,No,60,22,1,1,1,Yes,No,No,Yes,No,5,2,Yes,None,Insane
+TT,11,R3,1678,Outpost Side,No,Yes,29,Yes,Yes,Yes,Level 3,No,55,20,1,1,1,Yes,No,No,Yes,No,5,3,Yes,None,Fast
+UU,12,R1,1114,Depot Side,No,Yes,21,Yes,Yes,Yes,Level 1,No,39,13,1,1,0,Yes,No,No,Yes,No,5,2,Yes,None,Clean
+VV,12,R2,2056,Middle,No,Yes,33,Yes,Yes,Yes,Level 2,No,62,25,1,1,1,Yes,No,No,Yes,No,5,3,Yes,None,Dominant
+WW,12,R3,148,Outpost Side,No,Yes,19,Yes,No,Yes,No,No,34,10,1,0,0,No,No,No,Yes,No,4,3,Yes,None,Reliable
+XX,13,R1,1323,Depot Side,No,Yes,27,Yes,Yes,Yes,Level 3,No,50,18,1,1,1,Yes,No,No,Yes,No,5,2,Yes,None,Quic
+YY,13,R2,900,Middle,No,No,2,No,No,No,No,No,4,1,0,0,0,No,Yes,Yes,No,Yes,1,4,No,None,Dead bot
+ZZ,13,R3,3476,Outpost Side,No,Yes,15,Yes,Yes,Yes,No,No,27,9,1,0,0,No,No,No,Yes,No,4,3,Yes,None,Good
+AB,14,R1,254,Depot Side,No,Yes,35,Yes,Yes,Yes,Level 1,No,65,25,1,1,1,Yes,No,No,Yes,No,5,2,Yes,None,Peak performance
+CD,14,R2,1678,Middle,No,Yes,30,Yes,Yes,Yes,Level 2,No,58,22,1,1,1,Yes,No,No,Yes,No,5,3,Yes,None,Very fast cycles
+EF,14,R3,1114,Outpost Side,No,Yes,24,Yes,Yes,Yes,Level 3,No,45,18,1,1,0,Yes,No,No,Yes,No,5,2,Yes,None,Clean run
+GH,15,R1,2056,Depot Side,No,Yes,34,Yes,Yes,Yes,Level 1,No,63,24,1,1,1,Yes,No,No,Yes,No,5,3,Yes,None,Elite scoring
+IJ,15,R2,148,Middle,No,Yes,22,Yes,No,Yes,No,No,38,12,1,0,0,No,No,No,Yes,No,4,3,Yes,None,Consistent
+KL,15,R3,1323,Outpost Side,No,Yes,26,Yes,Yes,Yes,Level 2,No,48,17,1,1,0,Yes,No,No,Yes,No,5,2,Yes,None,Quick shooter
+MN,16,R1,254,Depot Side,No,Yes,33,Yes,Yes,Yes,Level 3,No,60,23,1,1,1,Yes,No,No,Yes,No,5,2,Yes,None,Consistent high
+OP,16,R2,1678,Middle,No,Yes,28,Yes,Yes,Yes,Level 1,No,52,20,1,1,0,Yes,No,No,Yes,No,5,3,Yes,None,Smooth cycles
+QR,16,R3,900,Outpost Side,No,No,4,No,No,No,No,No,8,2,0,0,0,No,Yes,Yes,No,Yes,1,4,No,None,Broken again
+ST,17,R1,2056,Depot Side,No,Yes,36,Yes,Yes,Yes,Level 2,No,66,26,1,1,1,Yes,No,No,Yes,No,5,3,Yes,None,Top tier
+UV,17,R2,1114,Middle,No,Yes,25,Yes,Yes,Yes,Level 3,No,46,18,1,1,0,Yes,No,No,Yes,No,5,2,Yes,None,Accurate
+WX,17,R3,3476,Outpost Side,No,Yes,18,Yes,Yes,Yes,No,No,30,10,1,0,0,No,No,No,Yes,No,4,3,Yes,None,Good intake
+YZ,18,R1,254,Depot Side,No,Yes,37,Yes,Yes,Yes,Level 1,No,68,27,1,1,1,Yes,No,No,Yes,No,5,2,Yes,None,Best match
+AA,18,R2,148,Middle,No,Yes,21,Yes,No,Yes,No,No,36,11,1,0,0,No,No,No,Yes,No,4,3,Yes,None,Reliabl
+BB,18,R3,1323,Outpost Side,No,Yes,27,Yes,Yes,Yes,Level 2,No,50,18,1,1,1,Yes,No,No,Yes,No,5,2,Yes,None,Fast
+CC,19,R1,1678,Depot Side,No,Yes,31,Yes,Yes,Yes,Level 3,No,59,23,1,1,1,Yes,No,No,Yes,No,5,3,Yes,None,Strong
+DD,19,R2,2056,Middle,No,Yes,35,Yes,Yes,Yes,Level 1,No,64,25,1,1,1,Yes,No,No,Yes,No,5,3,Yes,None,Dominant
+EE,19,R3,6045,Outpost Side,No,Yes,12,Yes,No,Yes,No,No,22,7,1,0,0,No,No,No,No,No,3,3,No,None,Average
+FF,20,R1,254,Depot Side,No,Yes,34,Yes,Yes,Yes,Level 2,No,63,24,1,1,1,Yes,No,No,Yes,No,5,2,Yes,None,Consistent
+GG,20,R2,1114,Middle,No,Yes,26,Yes,Yes,Yes,Level 3,No,47,18,1,1,0,Yes,No,No,Yes,No,5,2,Yes,None,Smooth
+HH,20,R3,900,Outpost Side,No,No,3,No,No,No,No,No,6,2,0,0,0,No,Yes,Yes,No,Yes,1,4,No,None,Dead
+II,21,R1,2056,Depot Side,No,Yes,38,Yes,Yes,Yes,Level 1,No,70,28,1,1,1,Yes,No,No,Yes,No,5,3,Yes,None,Insane
+JJ,21,R2,1678,Middle,No,Yes,29,Yes,Yes,Yes,Level 2,No,55,21,1,1,1,Yes,No,No,Yes,No,5,3,Yes,None,Fast
+KK,21,R3,3476,Outpost Side,No,Yes,17,Yes,Yes,Yes,No,No,29,9,1,0,0,No,No,No,Yes,No,4,3,Yes,None,Good
+LL,22,R1,254,Depot Side,No,Yes,36,Yes,Yes,Yes,Level 3,No,67,26,1,1,1,Yes,No,No,Yes,No,5,2,Yes,None,Top form
+MM,22,R2,148,Middle,No,Yes,23,Yes,No,Yes,No,No,39,12,1,0,0,No,No,No,Yes,No,4,3,Yes,None,Stable
+NN,22,R3,1323,Outpost Side,No,Yes,28,Yes,Yes,Yes,Level 1,No,52,19,1,1,1,Yes,No,No,Yes,No,5,2,Yes,None,Quick
+OO,23,R1,1678,Depot Side,No,Yes,32,Yes,Yes,Yes,Level 2,No,60,24,1,1,1,Yes,No,No,Yes,No,5,3,Yes,None,Consistent
+PP,23,R2,2056,Middle,No,Yes,37,Yes,Yes,Yes,Level 3,No,69,27,1,1,1,Yes,No,No,Yes,No,5,3,Yes,None,Elite
+QQ,23,R3,1114,Outpost Side,No,Yes,27,Yes,Yes,Yes,Level 1,No,50,19,1,1,1,Yes,No,No,Yes,No,5,2,Yes,None,Accurate
+RR,24,R1,254,Depot Side,No,Yes,35,Yes,Yes,Yes,Level 2,No,65,25,1,1,1,Yes,No,No,Yes,No,5,2,Yes,None,Great
+SS,24,R2,1678,Middle,No,Yes,31,Yes,Yes,Yes,Level 3,No,58,22,1,1,1,Yes,No,No,Yes,No,5,3,Yes,None,Fast
+TT,24,R3,900,Outpost Side,No,No,5,No,No,No,No,No,10,3,0,0,0,No,Yes,Yes,No,Yes,1,4,No,None,Bad match
