@@ -538,51 +538,72 @@ const CONFIG = {
       fields: [
         { title: "Scouter Initials", description: "Enter the initials of the scouter.", type: "text", required: true, code: "scouter", formResetBehavior: "preserve", defaultValue: " " },
         { title: "Match Number", description: "Enter the match number.", type: "number", required: true, code: "matchNumber", formResetBehavior: "increment", defaultValue: 1 },
-        { title: "Robot", description: "The robot you are scouting this match, based on driver station position.", type: "select", required: true, code: "robot", formResetBehavior: "preserve", defaultValue: "R1", choices: { R1: "Red 1", R2: "Red 2", R3: "Red 3", B1: "Blue 1", B2: "Blue 2", B3: "Blue 3" } },
         { title: "Team Number", description: "The team number of the robot you're scouting.", type: "number", required: true, code: "teamNumber", formResetBehavior: "reset", defaultValue: 0, min: 0, max: 19999 },
-        { title: "Starting Position", description: "The starting position of the robot.", type: "select", required: true, code: "Prsp", formResetBehavior: "reset", defaultValue: "Outpost Side", choices: { outpost: "Outpost Side", middle: "Middle", depot: "Depot Side" } },
-        { title: "No Show", description: "Check if the robot did not show up for the match.", type: "boolean", required: false, code: "noShow", formResetBehavior: "reset", defaultValue: false }
+        { title: "Starting Position", description: "The starting position of the robot.", type: "select", required: true, code: "Prsp", formResetBehavior: "reset", defaultValue: "Out", choices: { Out: "Outpost", Hub: "Hub", Dep: "Depot" } },
+        { title: "No Show", description: "Check if the robot did not show up for the match.", type: "select", required: false, code: "noShow", formResetBehavior: "reset", defaultValue: "false", choices: { FALSE: "false", TRUE: "true" } }
       ]
     },
     {
       name: "Autonomous",
       fields: [
-        { title: "Moved?", description: "Check if the robot moved during autonomous.", type: "boolean", required: false, code: "Mved", formResetBehavior: "reset", defaultValue: false },
-        { title: "Fuel Scored", description: "The amount of fuel scored in auto.", type: "counter", required: false, code: "FS", formResetBehavior: "reset", defaultValue: 0, min: 0, step: 1 },
-        { title: "Outpost Intake", description: "Check if the robot collected fuel from the outpost.", type: "boolean", required: false, code: "AOutpostIntake", formResetBehavior: "reset", defaultValue: false },
-        { title: "Depot Intake", description: "Check if the robot collected fuel from the depot.", type: "boolean", required: false, code: "ADepotIntake", formResetBehavior: "reset", defaultValue: false },
-        { title: "Neutral Zone Intake", description: "Check if the robot collected fuel from the neutral zone.", type: "boolean", required: false, code: "ANeutralIntake", formResetBehavior: "reset", defaultValue: false },
-        { title: "Climbed Tower", description: "The height the robot climbed in auto.", type: "select", required: false, code: "climbedAuto", formResetBehavior: "reset", defaultValue: "No", choices: { No: "Didn't Climb", L1: "Level 1", F: "Failed Climb" } },
-        { title: "Auto Foul", type: "counter", required: false, code: "auf", formResetBehavior: "reset", defaultValue: 0, min: 0, step: 1 }
+        { title: "Auto Actions", description: "First action of the robot during auto", type: "select", required: false, code: "actionOne", formResetBehavior: "reset", defaultValue: "Didn't Move", choices: { Dead: "Didn't Move", Scored: "Scored", Shuttle: "Shuttle" } },
+        { title: "Auto Actions", description: "Second action of the robot during auto", type: "select", required: false, code: "actionTwo", formResetBehavior: "reset", defaultValue: "Didn't Move", choices: { Dead: "Didn't Move", Scored: "Scored", Shuttle: "Shuttle", NoAction: "No Second Auto Action" } },
+        { title: "Climb", description: "Did the robot climb", type: "select", required: false, code: "climb", formResetBehavior: "reset", defaultValue: "No Climb", choices: { No: "No Climb", Yes: "Climb"} },
+        { title: "Successful Climb", description: "Did the robot successfully climb", type: "select", required: false, code: "successfulclimb", formResetBehavior: "reset", defaultValue: "Failed Climb", choices: { No: "Failed Climb", Yes: "Successful Climb"} },
+        { title: "Fuel Scored in Auto", description: "The amount of fuel scored in auto.", type: "counter", required: false, code: "autofuel", formResetBehavior: "reset", defaultValue: 0, min: 0, step: 1 }
       ]
     },
     {
-      name: "Teleop",
+      name: "Transition and First Shift",
       fields: [
-        { title: "Fuel Collected From Floor", description: "Collected fuel from the ground.", type: "boolean", required: false, code: "FFG", formResetBehavior: "reset", defaultValue: false },
-        { title: "Fuel Collected From Player", description: "Collected fuel from the human player.", type: "boolean", required: false, code: "FFHP", formResetBehavior: "reset", defaultValue: false },
-        { title: "5-Pt Fuel Scored", description: "The amount of 5-pt fuel scored in teleop.", type: "counter", required: false, code: "FIT", formResetBehavior: "reset", defaultValue: 0, min: 0, step: 1 },
-        { title: "15-Pt Fuel Scored", description: "The amount of 15-pt fuel scored in teleop.", type: "counter", required: false, code: "FIT2", formResetBehavior: "reset", defaultValue: 0, min: 0, step: 1 },
-        { title: "30-Pt Fuel Scored", description: "The amount of 30-pt fuel scored in teleop.", type: "counter", required: false, code: "FIT3", formResetBehavior: "reset", defaultValue: 0, min: 0, step: 1 },
-        { title: "Touched Opposing Tower", description: "The number of times the opposing tower was touched.", type: "counter", required: false, code: "FouTech", formResetBehavior: "reset", defaultValue: 0, min: 0, step: 1 },
-        { title: "During Off-Shift", type: "select", required: true, code: "OffShift", formResetBehavior: "reset", defaultValue: "Nothing", choices: { Defended: "Defended", Passed: "Passed", Nothing: "Did Nothing" } },
-        { title: "Got Stuck on Fuel?", type: "boolean", required: false, code: "GotStuck", formResetBehavior: "reset", defaultValue: false }
+        { title: "Scorer?", description: "Was the robot scoring in the first shift", type: "select", required: false, code: "firstScore", formResetBehavior: "reset", defaultValue: "false", choices: { FALSE: "false", TRUE: "true" } },
+        { title: "Shuttler?", description: "Was the robot passing in the first shift", type: "select", required: false, code: "firstShuttler", formResetBehavior: "reset", defaultValue: "false", choices: { FALSE: "false", TRUE: "true" } },
+        { title: "Defender?", description: "Was the robot doing defense in the first shift", type: "select", required: false, code: "firstDefender", formResetBehavior: "reset", defaultValue: "false", choices: { FALSE: "false", TRUE: "true" } },
+        { title: "Died?", description: "Did the robot die in the first shift", type: "select", required: false, code: "firstDie", formResetBehavior: "reset", defaultValue: "false", choices: { FALSE: "false", TRUE: "true" } }
+      ]
+    },
+    {
+      name: "Second Shift",
+      fields: [
+        { title: "Scorer?", description: "Was the robot scoring in the second shift", type: "select", required: false, code: "secondScore", formResetBehavior: "reset", defaultValue: "false", choices: { FALSE: "false", TRUE: "true" } },
+        { title: "Shuttler?", description: "Was the robot passing in the second shift", type: "select", required: false, code: "secondShuttler", formResetBehavior: "reset", defaultValue: "false", choices: { FALSE: "false", TRUE: "true" } },
+        { title: "Defender?", description: "Was the robot doing defense in the second shift", type: "select", required: false, code: "secondDefender", formResetBehavior: "reset", defaultValue: "false", choices: { FALSE: "false", TRUE: "true" } },
+        { title: "Died?", description: "Did the robot die in the second shift", type: "select", required: false, code: "secondDie", formResetBehavior: "reset", defaultValue: "false", choices: { FALSE: "false", TRUE: "true" } }
+      ]
+    },
+    {
+      name: "Third Shift",
+      fields: [
+        { title: "Scorer?", description: "Was the robot scoring in the third shift", type: "select", required: false, code: "thirdScore", formResetBehavior: "reset", defaultValue: "false", choices: { FALSE: "false", TRUE: "true" } },
+        { title: "Shuttler?", description: "Was the robot passing in the third shift", type: "select", required: false, code: "thirdShuttler", formResetBehavior: "reset", defaultValue: "false", choices: { FALSE: "false", TRUE: "true" } },
+        { title: "Defender?", description: "Was the robot doing defense in the third shift", type: "select", required: false, code: "thirdDefender", formResetBehavior: "reset", defaultValue: "false", choices: { FALSE: "false", TRUE: "true" } },
+        { title: "Died?", description: "Did the robot die in the third shift", type: "select", required: false, code: "thirdDie", formResetBehavior: "reset", defaultValue: "false", choices: { FALSE: "false", TRUE: "true" } }
+      ]
+    },
+    {
+      name: "Forth Shift",
+      fields: [
+        { title: "Scorer?", description: "Was the robot scoring in the fourth shift", type: "select", required: false, code: "fourthScore", formResetBehavior: "reset", defaultValue: "false", choices: { FALSE: "false", TRUE: "true" } },
+        { title: "Shuttler?", description: "Was the robot passing in the fourth shift", type: "select", required: false, code: "fourthShuttler", formResetBehavior: "reset", defaultValue: "false", choices: { FALSE: "false", TRUE: "true" } },
+        { title: "Defender?", description: "Was the robot doing defense in the forth shift", type: "select", required: false, code: "fourthDefender", formResetBehavior: "reset", defaultValue: "false", choices: { FALSE: "false", TRUE: "true" } },
+        { title: "Died?", description: "Did the robot die in the fourth shift", type: "select", required: false, code: "fourthDie", formResetBehavior: "reset", defaultValue: "false", choices: { FALSE: "false", TRUE: "true" } }
       ]
     },
     {
       name: "Endgame",
       fields: [
-        { title: "Climbed Tower", type: "select", required: true, code: "climbed", formResetBehavior: "reset", defaultValue: "No", choices: { No: "Didn't Climb", L1: "Level 1", L2: "Level 2", L3: "Level 3", F: "Failed Climb" } },
-        { title: "Died?", type: "boolean", required: false, code: "DEg", formResetBehavior: "reset", defaultValue: false }
+        { title: "Climbed", type: "select", required: true, code: "climbed", formResetBehavior: "reset", defaultValue: "No", choices: { No: "Didn't Climb", L1: "Level 1", L2: "Level 2", L3: "Level 3", F: "Failed Climb" } },
+        { title: "Where Climbed", type: "select", required: true, code: "whereClimbed", formResetBehavior: "reset", defaultValue: "No", choices: { No: "No Climb", Out: "Outpost Side", Mid: "Middle", Dep: "Depot Side" } },
+        { title: "Fuel Scored in Endgame", description: "Did the robot score fuel in endgame", type: "select", required: false, code: "endgamefuel", formResetBehavior: "reset", defaultValue: "false", choices: { FALSE: "false", TRUE: "true" } }
       ]
     },
     {
       name: "Postmatch",
       fields: [
+        { title: "Scoring Effectiveness", type: "range", required: false, code: "sr", formResetBehavior: "reset", defaultValue: 2, min: 0, max: 5, step: 1 },
         { title: "Passing Skill", type: "range", required: false, code: "or", formResetBehavior: "reset", defaultValue: 2, min: 0, max: 5, step: 1 },
-        { title: "Defensive Skill", type: "range", required: false, code: "dr", formResetBehavior: "reset", defaultValue: 2, min: 0, max: 5, step: 1 },
-        { title: "Was Robot Defended?", type: "boolean", required: false, code: "WasDefended", formResetBehavior: "reset", defaultValue: false },
-        { title: "Yellow/Red Card", type: "select", required: true, code: "yc", formResetBehavior: "reset", defaultValue: "No Card", choices: { "No Card": "No Card", Yellow: "Yellow Card", Red: "Red Card" } },
+        { title: "Defense Skill", type: "range", required: false, code: "dr", formResetBehavior: "reset", defaultValue: 2, min: 0, max: 5, step: 1 },
+        { title: "Shuttle Style", description: "How did the robot pass balls", type: "select", required: false, code: "shuttleStyle", formResetBehavior: "reset", defaultValue: "Shooting", choices: { shooting: "Shooting", push: "Push/Shovel", both : "Both", none : "None"} },
         { title: "Comments", type: "text", required: false, code: "co", formResetBehavior: "reset", defaultValue: "" }
       ]
     }
@@ -684,6 +705,7 @@ function renderField(f) {
     </div>
     ${desc}${input}
   </div>`;
+
 }
 
 function attachFieldListeners(f) {
